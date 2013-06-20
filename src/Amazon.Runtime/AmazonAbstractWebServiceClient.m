@@ -119,7 +119,7 @@
         }
         
         [self startSyncRequest:generatedRequest forRequest:urlRequest response:response originalRequest:originalRequest];
-        AMZLogDebug(@"Response Status Code : %d", response.httpStatusCode);
+        AMZLogDebug(@"Response Status Code : %ld", (long)response.httpStatusCode);
         if ( [self shouldRetry:response] ) {
             AMZLog(@"Retring Request: %d", retries);
             

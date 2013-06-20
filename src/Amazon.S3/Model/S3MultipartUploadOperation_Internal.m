@@ -251,7 +251,7 @@ typedef void (^AbortMultipartUploadBlock)();
         }
         else if([response isKindOfClass:[S3UploadPartResponse class]])
         {
-            AMZLogDebug(@"UploadPart succeeded: %d", self.currentPartNo);
+            AMZLogDebug(@"UploadPart succeeded: %ld", self.currentPartNo);
 
             S3UploadPartResponse *uploadPartResponse = (S3UploadPartResponse *)self.response;
 

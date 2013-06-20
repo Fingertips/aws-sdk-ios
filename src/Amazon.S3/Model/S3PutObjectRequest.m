@@ -106,7 +106,7 @@
     }
 
     if (expiresSet) {
-        [self.urlRequest setValue:[NSString stringWithFormat:@"%d", self.expires]
+        [self.urlRequest setValue:[NSString stringWithFormat:@"%ld", (long)self.expires]
                forHTTPHeaderField:kHttpHdrExpires];
     }
 
@@ -116,7 +116,7 @@
     else {
         [self.urlRequest setHTTPBody:data];
         if (self.contentLength < 1) {
-            [self.urlRequest setValue:[NSString stringWithFormat:@"%d", [data length]]
+            [self.urlRequest setValue:[NSString stringWithFormat:@"%ld", (unsigned long)[data length]]
                    forHTTPHeaderField:kHttpHdrContentLength];
         }
     }
@@ -173,7 +173,7 @@
 #ifdef DEBUG
 -(void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-    AMZLog(@"Wrote %d bytes to the connection", bytesWritten);
+    AMZLog(@"Wrote %ld bytes to the connection", (long)bytesWritten);
 }
 #endif
 
