@@ -67,8 +67,11 @@
         didTimeout = YES;
         [self.request.urlConnection cancel];
         self.request.responseTimer = nil;
-
-        exception  = [[AmazonClientException exceptionWithMessage:@"Request timed out."] retain];
+        
+        exception = [[AmazonServiceException exceptionWithMessage:@"Request timed out."] retain];
+        // Configure an error like NSURLConnection would so a retry will be performed by:
+        // -[AmazonAbstractWebServiceClient shouldRetry:exception:]
+        [(AmazonServiceException *)exception setError:[NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorTimedOut userInfo:nil]];
         
         BOOL throwsExceptions = [AmazonErrorHandler throwsExceptions];
         
